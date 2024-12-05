@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Currency Converter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input:focus, select:focus {
+            border-color: #4facfe;
+            outline: none;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #4facfe;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #00c6ff;
+        }
+
+        button.clear {
+            background-color: #f44336;
+        }
+
+        button.clear:hover {
+            background-color: #e53935;
+        }
+
+        .result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1><img src="logo.png" height="50px" width="50px"><br> Currency Converter</h1>
+        <form name="f1" onsubmit="event.preventDefault(); convertCurrency();" method="post">
+            <div class="form-group">
+                <label for="Convertfrom">Convert from:</label>
+                <select name="Convertfrom" id="Convertfrom">
+                    <option value="USD">USD</option>
+                    <option value="INR">INR</option>
+                    <option value="EUR">EUR</option>
+                    <option value="GBP">GBP</option>
+                    <option value="JPY">JPY</option>
+                    <option value="AUD">AUD</option>
+					<option value="LKR">LKR</option>
+					<option value="CHF">CHF</option>
+					<option value="RUB">RUB</option>
+					<option value="AED">AED</option>
+					<option value="AFN">AFN</option>
+					<option value="BRL">BRL</option>
+					<option value="DKK">DKK</option>
+					<option value="EGP">EGP</option>
+					<option value="MYR">MYR</option>
+					<option value="CUP">CUP</option>
+					<option value="COP">COP</option>
+					<option value="HKD">HDK</option>
+					<option value="HUF">HUF</option>
+					<option value="NOK">NOK</option>
+					<option value="UAH">UAH</option>
+					<option value="KWD">KWD</option>
+					<option value="OMR">OMR</option>
+					<option value="SAR">SAR</option>
+					<option value="MAD">MAD</option>
+					<option value="ZAR">ZAR</option>
+					<option value="SGD">SGD</option>
+					<option value="CNY">CNY</option>
+					<option value="PHP">PHP</option>
+					<option value="THB">THB</option>
+					<option value="VND">VND</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Convertto">Convert to:</label>
+                <select name="Convertto" id="Convertto">
+                    <option value="USD">USD</option>
+                    <option value="INR">INR</option>
+                    <option value="EUR">EUR</option>
+                    <option value="GBP">GBP</option>
+                    <option value="JPY">JPY</option>
+                    <option value="AUD">AUD</option>
+					<option value="LKR">LKR</option>
+					<option value="CHF">CHF</option>
+					<option value="RUB">RUB</option>
+					<option value="AED">AED</option>
+					<option value="AFN">AFN</option>
+					<option value="BRL">BRL</option>
+					<option value="DKK">DKK</option>
+					<option value="EGP">EGP</option>
+					<option value="MYR">MYR</option>
+					<option value="CUP">CUP</option>
+					<option value="COP">COP</option>
+					<option value="HKD">HDK</option>
+					<option value="HUF">HUF</option>
+					<option value="NOK">NOK</option>
+					<option value="UAH">UAH</option>
+					<option value="KWD">KWD</option>
+					<option value="OMR">OMR</option>
+					<option value="SAR">SAR</option>
+					<option value="MAD">MAD</option>
+					<option value="ZAR">ZAR</option>
+					<option value="SGD">SGD</option>
+					<option value="CNY">CNY</option>
+					<option value="PHP">PHP</option>
+					<option value="THB">THB</option>
+					<option value="VND">VND</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="inputc">Enter Amount:</label>
+                <input type="text" id="inputc" name="inputc" placeholder="Enter amount to convert">
+            </div>
+            <div class="btn-group">
+                <button type="button" onclick="convertCurrency()">Convert</button>
+                <button type="button" class="clear" onclick="resetForm()">Clear</button>
+            </div>
+            <div class="result">
+                <label for="CC">Converted Amount:</label>
+                <input type="text" id="CC" name="CC" readonly placeholder="Result appears here">
+            </div>
+        </form>
+        <footer>&copy; 2024 All rights reserved.</footer>
+    </div>
+</body>
+</html>
